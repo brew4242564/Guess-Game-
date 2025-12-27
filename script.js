@@ -37,19 +37,34 @@ const continueGame = () =>{
 }
 
 
-const play = () =>{
-    insertNum()
-    .then((result)=>{
+// const play = () =>{
+//     insertNum()
+//     .then((result)=>{
+//         alert(`Dado: ${result.randomnum}: obtuviste ${result.puntos} puntos`);
+//     continueGame()
+//     .then((result) =>{
+//         if(result) {
+//             play();
+//         }else{
+//             alert("Termino el juego");
+//         }
+//     });    
+//     }).catch((error) =>alert(error));
+// };
+
+
+const play = async() =>{
+    try{
+        const result = await insertNum();
         alert(`Dado: ${result.randomnum}: obtuviste ${result.puntos} puntos`);
-    continueGame()
-    .then((result) =>{
-        if(result) {
+        const isContinue = await continueGame();
+        if(isContinue){
             play();
         }else{
             alert("Termino el juego");
         }
-    });    
-    }).catch((error) =>alert(error));
-};
-
+    } catch(error){
+        alert(error);
+    }
+}
 play();
