@@ -27,13 +27,7 @@ const insertNum = () =>{
 
 
 const continueGame = () =>{
-    return new Promise((resolve)=>{
-        if(window.confirm("¿Quieres continuar?")){
-            resolve(true);
-        }else{
-            resolve(false);
-        }
-    });
+    return window.confirm("¿Quieres continuar jugando?");
 }
 
 
@@ -57,11 +51,11 @@ const play = async() =>{
     try{
         const result = await insertNum();
         alert(`Dado: ${result.randomnum}: obtuviste ${result.puntos} puntos`);
-        const isContinue = await continueGame();
-        if(isContinue){
+        const isContinue = continueGame();
+        if (isContinue){
             play();
         }else{
-            alert("Termino el juego");
+            alert("Juego terminado");
         }
     } catch(error){
         alert(error);
